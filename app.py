@@ -5,7 +5,7 @@ import pytz
 import os
 
 app = Flask(__name__)
-db_uri = os.environ.get("DATABASE_URL") or "postgresql://localhost/flasknote"
+db_uri = os.environ.get("DATABASE_URL") or "sqlite:///" + os.path.join(app.root_path, "board.db")
 if db_uri.startswith("postgres://"):
     db_uri = db_uri.replace("postgres://", "postgresql://", 1)
 app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
