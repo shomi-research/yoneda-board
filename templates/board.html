@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.css" integrity="sha384-6LkG2wmY8FK9E0vU9OOr8UvLwsaqUg9SETfpq4uTCN1agNe8HRdE9ABlk+fVx6gZ" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/katex.min.js" integrity="sha384-31El76TwmbHj4rF9DyLsygbq6xoIobG0W+jqXim+a3dU9W53tdH3A/ngRPxOzzaB" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.16/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>よねちゃんねる</title>
+</head>
+<body>
+
+  <a href="/">もどる</a> <a href="">更新</a>
+
+<h1>よねちゃんねる</h1>
+
+<form action="{{ url_for("board")}}" method="POST" enctype="multipart/form-data">
+  <div>
+    <p>名前:<br>
+    {% if name=="" %}
+    <textarea type="text" id="name" name="name" cols="40" rows="1" placeholder="名無しさん"></textarea></p>
+    {% else %}
+    <textarea type="text" id="name" name="name" cols="40" rows="1" >{{ name }}</textarea></p>
+    {% endif %}
+  </div>
+  <div>
+    <p>投稿:<br>
+    <textarea type="text" id="body" name="body" cols="40" rows="5" placeholder="いまどうしてる？"></textarea></p>
+  </div>
+  <div>
+    <button>post</button>
+  </div>
+</form>
+<hr>
+{% for board in boards %}
+  {{ board.name }} at {{ board.created_at }}
+  <p> {{ board.body | safe }} </p> <hr>
+{% endfor %}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {delimiters: [
+        {left: "\\[", right: "\\]", display: true},
+        {left: "$", right: "$", display: false}
+      ]});
+    });
+    </script>
+</body>
+</html>
