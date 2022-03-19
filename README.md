@@ -1,0 +1,2 @@
+# yoneda-board
+よねちゃんねる
